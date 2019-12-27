@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+
+{% block section1 %}
+    <h1>Posts</h1>
+    <br>
+    <h4><a href="{% url 'mainApp:posts_list' %}">Title</a></h4>
+    <h5><a href="{% url 'mainApp:posts_create_url' %}">posts_create</a></h4></h5>
+    <h5><a href="{% url 'mainApp:tags_create_url' %}">tags_create</a></h4></h5>
+    <br>
+    <p></p>
+
+
+{% endblock %}
+
+{% block section2 %}
+<div class="col-6 offset-md-2">
+
+{% block content %}
+
+{% endblock %}
+  {% if is_paginator %}
+    <nav aria-label="...">
+        <ul class="pagination">
+        <li class="page-item {% if not prev_url %} disabled {% endif %}">
+            <a class="page-link" href="{{ prev_url }}{% if search %}&search={{ search }}{% endif %}" tabindex="-1" aria-disabled="true">Previous</a>
+        </li>
+
+        {% for p in page_obj.paginator.page_range %}
+            {% if page_obj.number == p %}
+            <li class="page-item active" aria-current="page">
+                <span class="page-link" >{{ p }}<span class="sr-only">(current)</span></span>
+            </li>
+            {% elif p > page_obj.number|add:-3 and p < page_obj.number|add:3  %}
+            <li class="page-item"><a class="page-link" href="?page={{ p }}{% if search %}&search={{ search }}{% endif %}">{{ p }}</a></li>
+            {% endif %}
+        {% endfor %}
+
+
+        <li class="page-item {% if not next_url %} disabled {% endif %}" >
+            <a class="page-link" href="{{ next_url }}{% if search %}&search={{ search }}{% endif %}">Next</a>
+        </li>
+        </ul>
+    </nav>
+  {% endif %}
+</div>
+{% endblock %}
+
+
+{% block section3 %}
+{% if request.user.is_authenticated and request.user.is_staff %}
+    {% block admin %}
+    <div class="admin-panel align-items-center">
+            <a href="/admin/" class="btn btn-outline-info">admin</a>
+        <div class="btn-group">
+            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Create
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="{% url 'mainApp:posts_create_url' %}">Post</a>
+                <a class="dropdown-item" href="{% url 'mainApp:tags_create_url' %}">Tag</a>
+            </div>
+        </div>
+        {% if admin_obj %}
+        <a href="{{ admin_obj.get_update_url }}" class="btn btn-primary">Update</a>
+        <a href="{{ admin_obj.get_delete_url }}" class="btn btn-danger">Delete</a>
+        {% endif %}
+    </div>
+   {% endblock %}
+{% endif %}
+{% endblock %}

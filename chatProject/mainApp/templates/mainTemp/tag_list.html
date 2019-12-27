@@ -1,0 +1,28 @@
+{% extends 'mainTemp/base_main.html' %}
+
+{% block title %}
+Tags - list {{ block.super }}
+{% endblock %}
+
+{% block section1 %}
+<h1>Tags:</h1>
+{% endblock %}
+
+{% block content %}
+  
+  {% for tag in page_obj.object_list %}
+    <p></p>
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="card-title">{{ tag.title }}</h5>
+        <p class="card-text">{{ tag.slug }}</p>
+        <a href="{{ tag.get_absolute_url }}" class="btn btn-primary">read</a>
+        <a href="{{ tag.get_update_url }}" class="btn btn-primary">update</a>
+        <a href="{{ tag.get_delete_url }}" class="btn btn-primary">delete</a>
+      </div>
+    </div>
+  {% endfor %}
+
+{% endblock %}
+
+

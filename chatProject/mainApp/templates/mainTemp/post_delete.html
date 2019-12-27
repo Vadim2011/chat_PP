@@ -1,0 +1,25 @@
+{% extends 'mainTemp/base_main.html' %}
+
+{% block title %}
+Post - Delete {{ block.super }}
+{% endblock %}
+
+{% block section1 %}
+<h1>Post Delete:</h1>
+<h3>{{ item.title }}</h3>
+<h5>{{ item.slug }}</h5>
+<h5>{{ item.body }}</h5>
+<h5>{{ item.date_pub }}</h5>
+{% endblock %}
+
+{% block content %}
+
+    <form action="{% url 'mainApp:posts_delete_url' slug=item.slug %}" method="POST">
+        {% csrf_token %}
+        <h4>Are you sure you want delete {{ item.title }}</h4>
+        <a href="{{ item.get_absolute_url }}" class="btn btn-primary">Cancel</a>
+        <button type="submit" class="btn btn-danger">Delete post</button>
+        
+    </form>
+
+{% endblock %}

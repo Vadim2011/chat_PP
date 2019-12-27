@@ -1,0 +1,25 @@
+{% extends 'mainTemp/base_main.html' %}
+
+{% block title %}
+Tag {{ block.super }}
+{% endblock %}
+
+{% block section1 %}
+<h1>Tag:</h1>
+{% endblock %}
+
+{% block content %}
+
+  <h5 class="mb-5">{{ tag.title|title }} - title</h5>
+  <p class="mb-5">{{ tag.slug }} - slug</p>
+
+    {% for post in tag.posts.all %}
+      {% include 'mainTemp/includes/include_post.html' %}
+    {% endfor %}
+    
+
+    <a href="{% url 'mainApp:tags_list_url' %}" class="btn btn-primary mb-5">BackUp</a>
+{% endblock %}
+
+
+

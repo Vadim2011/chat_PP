@@ -1,0 +1,11 @@
+{% extends 'mainTemp/base_main.html' %}
+
+{% block content %}
+  
+  {% for post in page_obj.object_list %}
+    {% include 'mainTemp/includes/include_post.html' %}
+  {% endfor %}
+
+{% endblock %}
+
+

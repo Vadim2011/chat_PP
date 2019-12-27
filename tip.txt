@@ -1,0 +1,40 @@
+
+###############################################
+sudo apt-get install python3.7
+sudo apt-get install python3-pip
+pip3 install virtualenv
+virtualenv -p /usr/bin/python3.7 dj_env
+(virtualenv -p python3.7 myenv)
+(python3.7 -m venv myenv)
+source dj_env/bin/activate
+(deactivate)
+#############################
+pip install django==2.2
+python manage.py makemigrations
+python manage.py sqlmigrate mainApp 0001
+python manage.py shell
+>>> from mainApp.models import Posts
+>>> a1 = Posts(title='p_t1', slug='slug1', body='asdf')
+>>> a1.save()
+>>> a2 = Posts.objects.create(title='p_t2', slug='slug2', body='asdf2')
+lookup
+>>>Posts.objects.get(title__iexact='P_T2') #регистронезависимый
+>>> Posts.objects.filter(body__contains='a') #содержит
+>>> from mainApp.models import Tag
+>>> a1 = Tag.objects.create(title='django1', slug='dj-slug1')
+
+
+#############################
+python3.7 --version
+pip freeze
+pip freeze > requirements.txt
+Posts.mro()
+
+{{ block.super }}
+ssh-keygen -t rsa -b 4096 -C "rabota52933@mail.ru"
+eval "$(ssh-agent -s)"
+sudo apt-get install xclip
+xclip -sel clip ~/.ssh/id_rsa.pub
+
+
+

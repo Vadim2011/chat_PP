@@ -1,0 +1,35 @@
+{% extends 'mainTemp/base_main.html' %}
+
+{% block title %}
+Post - create {{ block.super }}
+{% endblock %}
+
+{% block section1 %}
+<h1>Post Create:</h1>
+{% endblock %}
+
+{% block content %}
+
+    <form action="{% url 'mainApp:posts_create_url' %}" method="POST">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="form-group">
+            
+            {{ field.label }}
+            {{ field }}
+
+            {% if field.errors%}
+              <div class="alert alert-danger">
+                  {{ field.errors }}
+              </div>
+            {% endif %}
+            
+        </div>
+        {% endfor %}
+          <button type="submit" class="btn btn-primary">Create post</button>
+        
+    </form>
+
+{% endblock %}
+
+

@@ -1,0 +1,18 @@
+.admin-panel{
+    /* background-color: aquamarine; */
+    border: 1px solid #888;
+    border-radius: 18px;
+    position: fixed;
+    right: 50px;
+    bottom: 50px;
+    opacity: 0.4;
+    padding: 15px;
+
+}
+.admin-panel:hover{
+    opacity: 0.9;
+}
+.admin-panel a{
+    display: block;
+    margin: 5px 0px;
+}
